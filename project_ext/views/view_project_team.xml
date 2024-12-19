@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_project_team_form" model="ir.ui.view">
+        <field name="name">project.team.form</field>
+        <field name="model">project.team</field>
+        <field name="arch" type="xml">
+            <form string="Team">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="team_leader_id" domain="[('share', '=', False), ('active', '=', True), ('id', 'in', member_ids)]"/>
+                        <field name="member_ids" widget="many2many_tags"/>
+                        <field name="project_ids" readonly="1" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_project_team_tree" model="ir.ui.view">
+        <field name="name">project.team.tree</field>
+        <field name="model">project.team</field>
+        <field name="arch" type="xml">
+            <tree string="Teams">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="team_leader_id"/>
+                <field name="member_ids"/>
+                <field name="project_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_project_team_kanban" model="ir.ui.view">
+        <field name="name">project.team.kanban</field>
+        <field name="model">project.team</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="team_leader_id"/>
+                <field name="member_ids"/>
+                <field name="project_ids"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_card_header">
+                                    <div class="oe_kanban_card_title">
+                                        <field name="name"/>
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_card_content">
+                                    <field name="description"/>
+                                </div>
+                                <div class="oe_kanban_card_footer">
+                                    <field name="team_leader_id"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_project_team_search" model="ir.ui.view">
+        <field name="name">project.team.search</field>
+        <field name="model">project.team</field>
+        <field name="arch" type="xml">
+            <search string="Search Team">
+                <field name="name" string="Name"/>
+                <field name="description" string="Description"/>
+                <field name="team_leader_id" string="Team Leader"/>
+                <field name="member_ids" string="Members"/>
+                <field name="project_ids" string="Projects"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_project_team" model="ir.actions.act_window">
+        <field name="name">Teams</field>
+        <field name="res_model">project.team</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="view_project_team_search"/>
+    </record>
+
+    <menuitem id="menu_project_team" name="Teams" parent="project.menu_main_pm" action="action_project_team"/>
+
+</odoo>

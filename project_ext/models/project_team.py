@@ -11,7 +11,8 @@ class ProjectTeam(models.Model):
 
     name = fields.Char(string='Name', required=True, copy=False, index=True, default='New Team')
     description = fields.Text(string='Description', copy=False)
-    member_ids = fields.Many2many('res.users', string='Members', copy=True) #Copy true will help to copy the members when we duplicate the team
+    team_leader_id = fields.Many2one('res.users', string='Team Leader', copy=False)
+    member_ids = fields.Many2many('res.users', string='Members', copy=True, domain=[('share', '=', False)]) #Copy true will help to copy the members when we duplicate the team
 
     project_ids = fields.One2many('project.project', 'team_id', string='Projects', copy=False)
 

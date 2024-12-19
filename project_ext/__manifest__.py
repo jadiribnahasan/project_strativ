@@ -8,6 +8,9 @@
     'depends': ['base', 'project'],
     'data': [
 
+        'security/ir.model.access.csv',
+
+        'views/view_project_team.xml',
     ],
     'installable': True,
     'application': True,
