@@ -11,6 +11,7 @@
         'security/ir.model.access.csv',
 
         'views/view_project_team.xml',
+        'views/view_project_inherit.xml',
     ],
     'installable': True,
     'application': True,

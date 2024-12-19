@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="project_view_form_inherit_project_ext" model="ir.ui.view">
+        <field name="name">project.view.form.inherit.project.ext</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="priority">32</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="team_id" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
