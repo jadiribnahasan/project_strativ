@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="project_access_rule" model="ir.rule">
+        <field name="name">Project - Only team members of the team assigned to the project can view it</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <field name="domain_force">user.get_allowed_project_ids()</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!--        Disable the rule which prevents applying customized record rules-->
+
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'project'), ('name', '=', 'project_public_members_rule')] "/>
+        </function>
+        <value eval="{'noupdate': False} "/>
+    </function>
+
+
+    <record model="ir.rule" id="project.project_public_members_rule">
+        <field name="name">Project: employees: following required for follower-only projects</field>
+        <field name="model_id" ref="model_project_project"/>
+        <field name="active" eval="False"/>
+        <field name="domain_force">['|',
+            ('privacy_visibility', '!=', 'followers'),
+            ('message_partner_ids', 'in', [user.partner_id.id])
+            ]
+        </field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'project'), ('name', '=', 'project_public_members_rule')] "/>
+        </function>
+        <value eval="{'noupdate': True} "/>
+    </function>
+</odoo>
