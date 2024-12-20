@@ -1,5 +1,5 @@
 {
-    'name': 'project extension',
+    'name': 'Project Extension - Strativ',
     'version': '1.0',
     'summary': 'Odoo project addon customization',
     'description': 'Customizations for the Odoo project addon.',
