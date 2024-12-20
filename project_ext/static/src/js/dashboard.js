@@ -1,4 +1,4 @@
-odoo.define("inventory_dashboard.dashboard", function (require) {
+odoo.define("project_ext.dashboard", function (require) {
     "use strict";
     var AbstractAction = require('web.AbstractAction');
     var core = require('web.core');
