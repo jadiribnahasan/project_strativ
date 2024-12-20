@@ -13,7 +13,16 @@
 
         'views/view_project_team.xml',
         'views/view_project_inherit.xml',
+        'views/dashboard_menu.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'project_ext/static/src/css/dashboard.css',
+            'project_ext/static/src/js/dashboard.js',
+            'project_ext/static/src/js/lib/Chart.bundle.js',
+            'project_ext/static/src/xml/dashboard.xml'
+        ],
+    },
     'installable': True,
     'application': True,
 }
